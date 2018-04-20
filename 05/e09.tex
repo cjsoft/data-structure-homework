@@ -1,0 +1,25 @@
+% ! TEX PROGRAM = xelatex
+\documentclass[UTF8]{ctexart}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \author{2017211123 褚逸豪}
+    \title{上三角压缩矩阵下标转换}
+\begin{document}
+    \maketitle
+    \section{整数元组坐标到单个整数的映射}
+    设$A$为n阶方阵，$b[k]=a_{i,j}$，由等差数列相关知识，易得$(i,j)$到$k$的映射关系：
+    $$\begin{aligned}
+        k=f(i,j)&=\frac{[n+(n-i+2)](i-1)}{2}+j-i+1;\\
+        &=\frac{(2n-i+2)(i-1)}{2}+j-i+1;\\
+        &=\frac{2ni-i^2+2i-2n+i-2}{2}+j-i+1;\\
+        &=\frac{-i^2+(2n+3)i-2n-2}{2}-i+j+1;\\
+        &=\frac{-i^2+(2n+1)i}{2}+j-n.
+    \end{aligned}$$
+    \par
+    令$k=f_1(i)+f_2(j)+c$，则有：
+    $$\begin{aligned}
+        f_1(i)&=\frac{-i^2+(2n+1)i}{2}\\
+        f_2(j)&=j\\
+        c&=-n
+    \end{aligned}$$
+\end{document}

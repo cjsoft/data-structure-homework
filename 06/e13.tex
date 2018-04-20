@@ -1,0 +1,35 @@
+% TEX PROGRAM = xelatex
+\documentclass[UTF8]{ctexart}
+    \author{2017211123 褚逸豪}
+    \title{树相关问题}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{geometry}
+    \geometry{a4paper,scale=0.55,top=0mm,bottom=25mm}
+\begin{document}
+    \maketitle
+    \section{满$k$叉树相关问题}
+        一棵满$k$叉树按层次顺序从$1$开始对全部结点编号，若所求结点存在，则有以下问题
+        \subsection{各层结点的数目为多少}
+            第$i$层有$k^{i-1}$个结点
+        \subsection{编号为$n$的结点的父结点的编号是多少}
+            设编号为$n$的结点的父结点的编号为$f(n)$，则有
+            $$f(n)=\left\lfloor\frac{n-2}{k}\right\rfloor+1$$
+        \subsection{结点$n$的第$i$个儿子的编号是多少}
+            设编号为$n$的结点的第$i$个儿子的编号为$g(n,i)$，则有
+            $$g(n,i)=(n-1)k+i+1$$
+        \subsection{结点$n$有右兄弟的条件是什么}
+            显然需要满足以下条件
+            $$n\not\equiv 1\pmod k$$
+    \section{度为$m$的树的相关问题}
+        已知一棵度为$m$的树中有$n_i$个度为$i$的结点，则有以下问题
+        \subsection{该树有多少个叶子节点}
+            显然答案为$n_0$，考虑如何通过其他的$n_i$求得$n_0$，有如下推理过程\par
+            设该树有$B$条边，有$n$个结点
+            $$\begin{aligned}
+                n&=n_0+\sum_{k=1}^mn_k;\\
+                B&=\sum_{k=1}^mkn_k.
+            \end{aligned}$$\par
+            由树的性质，可知$n=B+1$，即$n_0+\sum_{k=1}^mn_k=\sum_{k=1}^mkn_k+1$，则有
+            $$n_0=\sum_{k=1}^m(k-1)n_k+1$$
+\end{document}

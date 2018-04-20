@@ -1,0 +1,34 @@
+% !TEX program = xelatex
+\documentclass[24pt]{article}
+\usepackage{xeCJK}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+% \usepackage{geometry}
+% \geometry{a4paper,scale=0.75}
+\author{2017211123 褚逸豪}
+\title{n阶汉诺塔移动次数}
+\begin{document}
+    \maketitle
+    \section{符号}
+    我们记$T_n$为根据规则将n个圆盘从一根柱子移动到另一根指定的柱子所需要的最少移动次数。记三根柱子分别为A，B，C，我们要将所有的圆盘从A移动到C。
+    \section{推导递推关系}
+    我们通过分解问题，n阶汉诺塔问题可以降阶为n-1阶汉诺塔问题。因为我们实现任务的最优方法是先将最小的n-1个盘片移动到B，再将最大的盘片移动到C，最后将B上的盘片移动到C。我们可以不停的降阶，直到问题简化为到边界——0阶汉诺塔问题，你什么都不用做。\par
+    根据以上关系，我们轻松的得到${T_n}$的递推关系及初始条件
+    $$\begin{array}{l}
+        T_0=0;\\
+        T_n=2T_{n-1}+1,\ n>0.
+    \end{array}$$
+    \section{do some math tricks}
+    通过高中数学的数列处理技巧，我们对式子进行如下变形
+    $$\begin{array}{l}\begin{aligned}
+        T_n&=2T_{n-1}+1;\\
+        T_n+1&=2T_{n-1}+2;\\
+        T_n+1&=2(T_{n-1}+1);\\
+        T_0+1&=1;\\
+        T_n+1&=2^{n};\\
+        T_n&=2^n-1.
+    \end{aligned}\end{array}$$
+    \par
+    至此，我们已经成功的推导出了n阶汉诺塔所需要最少的移动次数——$2^n-1$。
+\end{document}

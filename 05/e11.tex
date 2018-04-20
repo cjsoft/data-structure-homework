@@ -1,0 +1,46 @@
+% ! TEX PROGRAM = xelatex
+\documentclass[UTF8]{ctexart}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{geometry}
+    \usepackage{multicol}
+    \geometry{a4paper,scale=0.7}
+    \title{广义表运算}
+    \author{2017211123 褚逸豪}
+\begin{document}
+    \maketitle
+    \begin{multicols}{2}\noindent
+        \section{约定}
+        多元素元组表示方式：$(x_1,x_2,x_3,\ldots)$\par
+        单元素元组表示方式：$(x,)$
+        \section{求广义表运算的结果}
+        $$\begin{aligned}
+            Head[((a,b),(c,d))]&=(a,b)\\
+            Tail[((a,b),(c,d))]&=((c,d),)\\
+            Head[Tail[((a,b),(c,d))]]&=(c,d)\\
+            Tail[Head[((a,b),(c,d))]]&=(b,)\\
+            Head[Tail[Head[((a,b),(c,d))]]]&=b\\
+            Tail[Head[Tail[((a,b),(c,d))]]]&=(d,)
+        \end{aligned}$$
+        \section{利用Head和Tail运算取出原子c}
+        $$\begin{aligned}
+            L_1&=(a,b,c,d);\\
+            c&=Head[Tail[Tail[L_1]]].\\
+            L_2&=((a,b),(c,d));\\
+            c&=Head[Head[Tail[L_2]]].\\
+            L_3&=(((a,),(b,),(c,),(d,)));\\
+            c&=Head[Head[Tail[Tail[L_3]]]].\\
+            L_4&=(a,(b,),((c,),),(((d,),),));\\
+            c&=Head[Head[Head[Tail[Tail[L_4]]]]].\\
+            L_5&=((((a,),),),((b,),),(c,),d);\\
+            c&=Head[Head[Tail[Tail[L_5]]]].\\
+            L_6&=((((a,),b),c),d);\\
+            c&=Head[Tail[Head[L_6]]].\\
+            L_7&=(a,(b,(c,(d,))));\\
+            c&=Head[Head[Tail[Head[Tail[L_7]]]]].\\
+            L_8&=(a,(b,(c,),d));\\
+            c&=Head[Head[Tail[Head[Tail[L_8]]]]].
+        \end{aligned}$$    
+    \end{multicols}
+    
+\end{document}

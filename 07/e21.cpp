@@ -5,19 +5,42 @@
 #include <map>
 #define MXN 1007
 using namespace std;
-map<set<int>, vector<int>> sts;
+set<vector<int>> sts;
 vector<int> v[MXN];
 int n, m;
 int seq[MXN], loc[MXN];
 char tag[MXN];
+#define MREPMXN 1007
+typedef int MREPTP;
+
+MREPTP _SEQ[MREPMXN << 1 | 1];
+
+int minrep(MREPTP a[], int n) {
+    memset(_SEQ, 0, sizeof(_SEQ));
+    memcpy(_SEQ, a, sizeof(MREPTP) * n);
+    memcpy(_SEQ + n, _SEQ, sizeof(MREPTP) * n);
+    int i = 0, j = 1, k;
+    while (j < n) {
+        k = 0;
+        while (j + k < (n << 1) && _SEQ[i + k] == _SEQ[j + k]) ++k;
+        if (j + k == (n << 1)) break;
+        else if (_SEQ[i + k] > _SEQ[j + k]) {
+            i = std::max(i + k + 1, j);
+            j = i + 1;
+        } else j += k + 1;
+    }
+    return i;
+}
+
 void dfs(int root, int dep) {
     if (tag[root] == 1) {
-        set<int> tmp;
-        vector<int> tp;
-        for (int i = loc[root]; i < dep; ++i)
-            tmp.insert(seq[i]), tp.push_back(seq[i]);
-        if (sts.find(tmp) != sts.cend()) return;
-        sts.insert(make_pair(tmp, tp));
+        vector<int> tmp;
+        int x = minrep(seq + loc[root], dep - loc[root]);
+        for (int i = loc[root] + x; i < dep; ++i)
+            tmp.push_back(seq[i]);
+        for (int i = loc[root]; i < loc[root] + x; ++i)
+            tmp.push_back(seq[i]);
+        sts.insert(tmp);
         return;
     }
     tag[root] = 1;
@@ -38,18 +61,32 @@ int main() {
     for (int i = 1; i <= n; ++i)
         if (tag[i] == 0)
             dfs(i, 0);
-    printf("Found %d distinct simple cycle:\n", sts.size());
+    printf("Found %d distinct simple cycles, expressed in their minimum representation:\n", sts.size());
     for (auto i : sts) {
-        for (auto j : i.second)
+        for (auto j : i)
             printf("%d ", j);
         putchar('\n');
     }
 }
 /**
  root  …  git-repos  data-structure-homework  07  g++ e21.cpp -std=c++11
- root  …  git-repos  data-structure-homework  07  ./a.out        master 
-7
-11
+ root  …  git-repos  data-structure-homework  07  ./a.out       master 
+4 7
+1 2
+2 3
+3 4
+4 1
+1 3
+3 2
+2 4
+Found 5 distinct simple cycles, expressed in their minimum representation:
+1 2 3 4
+1 2 4
+1 3 2 4
+1 3 4
+2 3
+ root  …  git-repos  data-structure-homework  07  ./a.out       master 
+7 11
 5 6
 5 7
 7 6
@@ -61,9 +98,9 @@ int main() {
 1 2
 3 1
 4 3
-Found 3 distinct simple cycle:
+Found 3 distinct simple cycles, expressed in their minimum representation:
 1 2 3
-1 2 4 3
 1 2 4
- root  …  git-repos  data-structure-homework  07                 master 
+1 2 4 3
+ root  …  git-repos  data-structure-homework  07                master 
 */

@@ -1,0 +1,14 @@
+\documentclass[UTF8]{ctexart}
+    \author{2017211123 褚逸豪}
+    \title{快速排序最坏复杂度}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{geometry}
+\begin{document}
+    \maketitle
+    \section{假设}
+    假设我们要将序列排序为非降序序列，而给定序列是一个有序的降序序列，每次选取下标最小的元素作为参照元素
+    \section{证明}
+    第一层$PARTION-SORT$，参照元素要向右移动$n-1$次，递归到下一层时，右侧将直接退出，而左侧余下n-1个元素等待$PARTION-SORT$，参考元素将移动$n-2$次。以此类推，总共将有$\sum_{i=1}^{n-1}i=\frac{n(n-1)}{2}$次元素移动，因此此种快速排序的复杂度将退化至$O(n^2)$
+    
+\end{document}

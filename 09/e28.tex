@@ -1,0 +1,96 @@
+% TEX PROGRAM = xelatex
+\documentclass[UTF8]{ctexart}
+    \title{哈希表相关问题}
+    \author{2017211123 褚逸豪}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{geometry}
+    \geometry{a4paper,scale=0.8}
+\begin{document}
+    \maketitle
+    1到3节均基于假设：数据是按照原顺序插入散列表的。
+    \section{计算H(x)}
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            源关键字 & H(x) & 源关键字 & H(x)\\
+            \hline
+            Jan & 4 & Jul & 4\\
+            \hline
+            Feb & 2 & Aug & 0\\
+            \hline
+            Mar & 6 & Sep & 9\\
+            \hline
+            Apr & 0 & Oct & 7\\
+            \hline
+            May & 6 & Nov & 6\\
+            \hline
+            Jun & 4 & Dec & 1\\
+            \hline
+        \end{tabular}
+    \end{center}
+    \section{使用线性探测法处理冲突}
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16\\
+            \hline
+            Apr&Aug&Feb&Dec&Jan&Jun&Mar&May&Jul&Sep&Oct&Nov& & & & &\\
+            \hline
+        \end{tabular}
+    \end{center}
+    \section{使用链地址法处理冲突}
+    \begin{center}
+        \begin{tabular}{|c|llll}
+            \cline{1-1}
+            0&$\rightarrow$Apr&$\rightarrow$Aug&$\bigwedge$   \\
+           \cline{1-1}
+            1&$\rightarrow$Dec&$\bigwedge$  \\
+           \cline{1-1}
+             2&$\rightarrow$Feb&$\bigwedge$   \\
+           \cline{1-1}
+             3&$\bigwedge$   \\
+           \cline{1-1}
+             4&$\rightarrow$Jan&$\rightarrow$Jun&$\rightarrow$Jul$\bigwedge$   \\
+           \cline{1-1}
+             5&$\bigwedge$   \\
+           \cline{1-1}
+             6&$\rightarrow$Mar&$\rightarrow$May&$\rightarrow$Nov$\bigwedge$   \\
+           \cline{1-1}
+             7&$\rightarrow$Oct &$\bigwedge$   \\
+           \cline{1-1}
+             8&$\bigwedge$   \\
+           \cline{1-1}
+             9&$\rightarrow$Sep &$\bigwedge$   \\
+           \cline{1-1}
+             10&$\bigwedge$  \\
+           \cline{1-1}
+             11&$\bigwedge$ \\
+           \cline{1-1}
+             12&$\bigwedge$ \\
+           \cline{1-1}
+             13&$\bigwedge$ \\
+           \cline{1-1}
+             14&$\bigwedge$ \\
+           \cline{1-1}
+             15&$\bigwedge$ \\
+           \cline{1-1}
+             16&$\bigwedge$ \\
+           \cline{1-1}
+             
+        \end{tabular}
+    \end{center}
+    \section{平均查找长度}
+    \subsection{线性探测法}
+    \subsubsection{查找成功}
+    % $$ASL(12)=\frac{1}{12}(1\times 5+2\times 3+3\times 1+4\times 1+5\times 2)=\frac{29}{12}$$
+    $$S_{nl}\approx \frac{1}{2} \left( 1+\frac{1}{1-\frac{12}{17}}\right)=\frac{11}{5}=2.2$$
+    \subsubsection{查找失败}
+    $$U_{nl}\approx \frac{1}{2} \left( 1+\frac{1}{\left(1-\frac{12}{17}\right)^2}\right)=\frac{157}{25}=6.28$$
+    \subsection{链地址法}
+    \subsubsection{查找成功}
+    % $$ASL(12)=\frac{1}{12}(1\times 5+2\times 3+3\times 1+4\times 1+5\times 2)=\frac{29}{12}$$
+    $$S_{ne}\approx 1+\frac{\frac{12}{17}}{2}=\frac{23}{17}\approx 1.35$$
+    \subsubsection{查找失败}
+    $$U_{ne}\approx \frac{12}{17}+e^{-\frac{12}{17}}\approx 3.42$$
+\end{document}

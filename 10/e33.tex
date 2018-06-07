@@ -1,0 +1,25 @@
+\documentclass[UTF8]{ctexart}
+    \title{最大值最小值算法}
+    \author{2017211123 褚逸豪}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{geometry}
+\begin{document}
+    \maketitle
+    \section{记号}
+    我们将待排序序列记作$a_{1\ldots n}$，约定序列长度不低于$2$，最小值为$A$，最大值为$B$
+    \section{算法}
+    \begin{enumerate}
+        \item 比较$a_1$与$a_2$，将较大值赋给$B$，较小值赋给$A$，进入步骤2
+        \item 置计数器$i$为$3$，进入步骤3
+        \item 若$B<a_i$，那么令$B:=a_i$并进入步骤5，否则进入步骤4
+        \item 若$A>a_i$，那么令$A:=a_i$，进入步骤5
+        \item 令计数器$i$自加$1$，如果$i>n$，那么进入步骤6，否则进入步骤3
+        \item 输出$A$和$B$，分别为数列最大值和最小值，算法结束
+    \end{enumerate}
+    \section{算法分析}
+    \subsection{比较次数}
+    步骤1进行1次比较，步骤2到6最多进行$2(n-2)$次比较，合计最多进行$2n-3$次比较
+    \subsection{最坏情况}
+    若数列最大值出现在位置1或位置2，那么显然，每次都会进行两次判断，此时达到最坏情况，共进行$2n-3$次比较
+\end{document}

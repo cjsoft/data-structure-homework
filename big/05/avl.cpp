@@ -52,14 +52,14 @@ namespace avl { // 可以重构为class，以编在一个程序中使用多棵AV
             if (alp <= -2 || alp >= 2) { // 如果平衡因子绝对值达到2
                 node *pp = p->p;
                 int dd = isrson(p), d = isrson(lp);
-                if (!isrson(llp)) { // LX
+                if (!isrson(llp)) { // LL RR
                     p->c[d] = lp->c[d ^ 1];
                     if (p->c[d] != nil) p->c[d]->p = p;
                     lp->c[d ^ 1] = p;
                     p->p = lp;
                     if (pp == nil) root = lp;
                     else pp->c[dd] = lp;
-                } else { // RX
+                } else { // LR RL
                     lp->c[d ^ 1] = llp->c[d];
                     p->c[d] = llp->c[d ^ 1];
                     if (lp->c[d ^ 1] != nil) lp->c[d ^ 1]->p = lp;
